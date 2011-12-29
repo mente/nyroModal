@@ -5,6 +5,7 @@ Fork of [nyroModal](https://github.com/nyroDev/nyroModal), that uses twitter boo
 ###Usage
 
 nyroModal-bootstrap doesn't provide contents of modal form, only wrapper with class "modal". Example of form inside:
+<pre>
 	<div class="modal-header">
 		<a href="#" class="nyroModalClose close">&times;</a>
 		<h3>Form example</h3>
@@ -23,7 +24,7 @@ nyroModal-bootstrap doesn't provide contents of modal form, only wrapper with cl
 			<a href="#" class="btn nyroModalClose">Cancel</a>
 		</div>
 	</form>
-
+</pre>
 
 ###Credits
 
