@@ -20,8 +20,8 @@ jQuery(function($, undefined) {
 			closeOnClick: true,	// Indicates if a click on the background should close the modal
 			useKeyHandler: false,	// Indicates if the modal has to handle key down event
 
-			showCloseButton: true,	// Indicates if the closeButonn should be added
-			closeButton: '<a href="#" class="nyroModalClose nyroModalCloseButton nmReposition" title="close">Close</a>',	// Close button HTML
+			showCloseButton: false,	// Indicates if the closeButonn should be added
+			closeButton: '<a href="#" class="nyroModalClose nyroModalCloseButton nmReposition" close title="close">&times;</a>',	// Close button HTML
 
 			stack: false,	// Indicates if links automatically binded inside the modal should stack or not
 			nonStackable: 'form',	// Filter to not stack DOM element
@@ -279,8 +279,7 @@ jQuery(function($, undefined) {
 				this.elts.hidden
 					.append(this._filterScripts(html))
 					.prepend(this.header)
-					.append(this.footer)
-					.wrapInner('<div class="nyroModal'+ucfirst(this.loadFilter)+'" />');
+					.append(this.footer);
 
 				// Store the size of the element
 				this.sizes.initW = this.sizes.w = this.elts.hidden.width();
@@ -466,14 +465,7 @@ jQuery(function($, undefined) {
 					.empty()
 					.append(this.elts.hidden.contents())
 					.append(this._scripts)
-					.append(this.showCloseButton ? this.closeButton : '')
-					.css({
-						position: 'fixed',
-						width: this.sizes.w,
-						height: this.sizes.h,
-						top: (this.getInternal().fullSize.viewH - this.sizes.h - this.sizes.hMargin)/2,
-						left: (this.getInternal().fullSize.viewW - this.sizes.w - this.sizes.wMargin)/2
-					});
+					.append(this.showCloseButton ? this.closeButton : '');
 			},
 
 			// Reposition elements with a class nmReposition
@@ -789,15 +781,15 @@ jQuery(function($, undefined) {
 						nm.useKeyHandler = true;
 				},
 				initElts: function(nm) {
-					nm.elts.bg.addClass('nyroModalBg');
+					nm.elts.bg.addClass('modal-backdrop');
 					if (nm.closeOnClick)
 						nm.elts.bg.unbind('click.nyroModal').bind('click.nyroModal', function(e) {
 							e.preventDefault();
 							nm.close();
 						});
-					nm.elts.cont.addClass('nyroModalCont');
-					nm.elts.hidden.addClass('nyroModalCont nyroModalHidden');
-					nm.elts.load.addClass('nyroModalCont nyroModalLoad');
+					nm.elts.cont.addClass('modal');
+					nm.elts.hidden.addClass('nyroModalCont modal hide');
+					nm.elts.load.addClass('nyroModalCont modal nyroModalLoad');
 				},
 				error: function(nm) {
 					nm.elts.hidden.addClass('nyroModalError');
