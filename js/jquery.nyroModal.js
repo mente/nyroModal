@@ -294,6 +294,15 @@ jQuery(function($, undefined) {
 				this._callFilters('filledContent');
 				this._contentLoading();
 			},
+			
+			//Return bootstrap-compatible modal content. Has only 1 button - ok, that is bound to close
+			_wrapBody: function(heading, html) {
+				var text = '<div class="modal-header"><a href="javascript:void(0);" class="nyroModalClose close">&times;</a><h3>' + heading + '</h3></div>';
+				text += '<div class="modal-body">' + html + '</div>';
+				text += '<div class="modal-footer"><a href="javascript:void(0);" class="btn nyroModalClose">Ok</a></div>';
+				
+				return text;
+			},
 
 			// Filter an html content to remove the script[src] and store them appropriately if needed
 			// - data: Data to filter
@@ -794,7 +803,7 @@ jQuery(function($, undefined) {
 				error: function(nm) {
 					nm.elts.hidden.addClass('nyroModalError');
 					nm.elts.cont.addClass('nyroModalError');
-					nm._setCont(nm.errorMsg);
+					nm._setCont(nm._wrapBody("Ooops", nm.errorMsg));
 				},
 				beforeShowCont: function(nm) {
 					nm.elts.cont
